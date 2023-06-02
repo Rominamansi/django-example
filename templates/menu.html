@@ -11,8 +11,15 @@
                     <a class="nav-link active" href=" {% url 'cliente'  %}">Clientes</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Productos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'monitor' %}">Monitores</a></li>
+                        <li><a class="dropdown-item" href="{% url 'mouse' %}">Mouses</a></li>
+                        <li><a class="dropdown-item" href="{% url 'computador' %}">Computadores</a></li>
+                    </ul>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -21,13 +28,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Ingresar Producto</a></li>
-                        <li><a class="dropdown-item" href="{% url 'ingresar-cliente' %}">Ingresar Cliente</a></li>
-
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Realizar Compra</a></li>
-
+                        <li><a class="dropdown-item" href="{% url 'ingresar-cliente' %}">Ingresar Cliente</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href=" {% url 'cliente'  %}">Realizar Compra</a>
+                </li>
+
             </ul>
 
         </div>

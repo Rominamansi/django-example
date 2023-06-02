@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Producto: Monitores</h3>
+</br>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Resolución</th>
+
+    </tr>
+    </thead>
+    <tbody >
+    {% for item in data %}
+    <tr>
+        <td>{{ item.idProducto }}</td>
+        <td>{{ item.marca }}</td>
+        <td>{{ item.precioUnitario }}</td>
+        <td>{{ item.resolucion }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

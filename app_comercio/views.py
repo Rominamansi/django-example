@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
 
 from .forms import ClienteForm
-from .models import Cliente
+from .models import Cliente, Monitor, Mouse, Computador
 
 
 class HomePageView(TemplateView):
@@ -21,6 +21,25 @@ class AboutPageView(TemplateView):
 class ClientePageView(ListView):
     model = Cliente
     template_name = "cliente.html"
+    context_object_name = 'data'
+
+
+class MonitorPageView(ListView):
+    model = Monitor
+    template_name = "monitor.html"
+    context_object_name = 'data'
+
+
+class MousePageView(ListView):
+    model = Mouse
+    template_name = "mouse.html"
+    context_object_name = 'data'
+
+
+class ComputadorPageView(ListView):
+    model = Computador
+    template_name = "computador.html"
+    context_object_name = 'data'
 
 
 class AddClientePageView(SuccessMessageMixin, CreateView):
@@ -39,4 +58,3 @@ class AddClientePageView(SuccessMessageMixin, CreateView):
 
     def form_invalid(self, form):
         return super().form_invalid(form)
-

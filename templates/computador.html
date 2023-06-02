@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Producto: Computadores</h3>
+</br>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>CPU</th>
+        <th>Memoria RAM</th>
+        <th>Almacenamiento</th>
+
+    </tr>
+    </thead>
+    <tbody >
+    {% for item in data %}
+    <tr>
+        <td>{{ item.idProducto }}</td>
+        <td>{{ item.marca }}</td>
+        <td>{{ item.precioUnitario }}</td>
+        <td>{{ item.cpu }}</td>
+        <td>{{ item.ram }}</td>
+        <td>{{ item.hdd }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
