@@ -4,13 +4,6 @@ from .models import Computador, Cliente, Monitor, Mouse
 
 
 # Crear un formulario para Computador
-class ComputadorForm(ModelForm):
-    class Meta:
-        model = Computador
-        fields = "__all__"
-
-
-# Crear un formulario para Computador
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
@@ -40,7 +33,7 @@ class MonitorForm(ModelForm):
             'marca': '',
             'precioUnitario': '',
             'resolucion': '',
-            'imagen_producto' : '',
+            'imagen_producto': '',
 
         }
         widgets = {

@@ -1,6 +1,8 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.checks import messages
+from django.http import Http404
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView
 
 from .forms import ClienteForm, MonitorForm, ComputadorForm, MouseForm
@@ -8,41 +10,46 @@ from .models import Cliente, Monitor, Mouse, Computador
 
 
 class HomePageView(TemplateView):
-    # def homePageView(request):
+
     template_name = "home.html"
-    # return HttpResponse("Hola, Mundo!")
 
 
 class AboutPageView(TemplateView):
-    # def homePageView(request):
+
     template_name = "about.html"
 
 
 class ClientePageView(ListView):
+
     model = Cliente
     template_name = "cliente.html"
     context_object_name = 'data'
+    http_method_names = ['get', 'post']
 
 
 class MonitorPageView(ListView):
+
     model = Monitor
     template_name = "monitor.html"
     context_object_name = 'data'
 
 
 class MousePageView(ListView):
+
     model = Mouse
     template_name = "mouse.html"
     context_object_name = 'data'
 
 
 class ComputadorPageView(ListView):
+
     model = Computador
     template_name = "computador.html"
     context_object_name = 'data'
 
 
 class AddClientePageView(SuccessMessageMixin, CreateView):
+
     form_class = ClienteForm
     template_name = 'IngresarCliente.html'
     success_message = 'Cliente Ingresado'
@@ -61,6 +68,7 @@ class AddClientePageView(SuccessMessageMixin, CreateView):
 
 
 class AddMonitorPageView(SuccessMessageMixin, CreateView):
+
     form_class = MonitorForm
     template_name = 'IngresarMonitor.html'
     success_message = 'Monitor Ingresado'
@@ -79,6 +87,7 @@ class AddMonitorPageView(SuccessMessageMixin, CreateView):
 
 
 class AddComputadorPageView(SuccessMessageMixin, CreateView):
+
     form_class = ComputadorForm
     template_name = 'IngresarComputador.html'
     success_message = 'Computador Ingresado'
@@ -97,6 +106,7 @@ class AddComputadorPageView(SuccessMessageMixin, CreateView):
 
 
 class AddMousePageView(SuccessMessageMixin, CreateView):
+
     form_class = MouseForm
     template_name = 'IngresarMouse.html'
     success_message = 'Mouse Ingresado'
@@ -112,3 +122,26 @@ class AddMousePageView(SuccessMessageMixin, CreateView):
 
     def form_invalid(self, form):
         return super().form_invalid(form)
+
+
+class DeleteClientView(View):
+
+    template_name = 'cliente.html'
+    success_url = 'cliente'
+
+    def post(self, request):
+        selected_items = request.POST.getlist('selected_items')
+
+        # Validate and sanitize the selected_items
+        try:
+            selected_items = list(map(int, selected_items))  # Convert to a list of integers
+        except ValueError:
+            raise Http404("Invalid input for selected_items")
+
+        # Perform the deletion
+        Cliente.objects.filter(rut__in=selected_items).delete()
+
+        return redirect(self.success_url)  # Redirect to a success page or another view
+
+    def get(self, request):
+        return render(request, self.template_name)

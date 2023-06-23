@@ -30,6 +30,7 @@ class Monitor(Producto):
     def __str__(self):
         return str(self.idProducto) + "  - Monitor"
 
+
 class Computador(Producto):
     cpu = models.CharField(max_length=5)
     ram = models.IntegerField()
@@ -48,6 +49,9 @@ class Cliente(models.Model):
     compraMouse = models.ManyToManyField(Mouse, blank=True)
     compraComputador = models.ManyToManyField(Computador, blank=True)
     compraMonitor = models.ManyToManyField(Monitor, blank=True)
+    selected = models.BooleanField(default=False)
+
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.rut) + " - " + self.nombre

@@ -1,31 +1,39 @@
 {% extends "base.html" %}
+
 {% block content %}
+
 <h3>Clientes Registrados</h3>
 </br>
 
-<table class="table table-striped table-hover">
-  <thead>
-  <tr>
-    <th>Rut</th>
-    <th>Nombre</th>
-    <th>Dirección</th>
-    <th>Celular</th>
-    <th>Email</th>
-  </tr>
-  </thead>
-  <tbody >
-  {% for item in data %}
-  <tr>
-    <td>{{ item.rut }}</td>
-    <td>{{ item.nombre }}</td>
-    <td>{{ item.direccion }}</td>
-    <td>{{ item.celular }}</td>
-    <td>{{ item.email }}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<form method="POST" action="{% url 'delete_data' %}">
+  {% csrf_token %}
 
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Rut</th>
+      <th>Nombre</th>
+      <th>Dirección</th>
+      <th>Celular</th>
+      <th>Email</th>
+      <th>Seleccionar</th>
+    </tr>
+    </thead>
+    <tbody >
+    {% for item in data %}
+    <tr>
+      <td>{{ item.rut }}</td>
+      <td>{{ item.nombre }}</td>
+      <td>{{ item.direccion }}</td>
+      <td>{{ item.celular }}</td>
+      <td>{{ item.email }}</td>
+      <td><input type="checkbox" name="selected_items" value="{{ item.rut }}"></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Delete Selected</button>
+</form>
 
 
 {% endblock content %}
