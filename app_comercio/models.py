@@ -5,6 +5,13 @@ class Producto(models.Model):
     idProducto = models.BigIntegerField(primary_key=True)
     marca = models.CharField(max_length=120)
     precioUnitario = models.IntegerField()
+    imagen_producto = models.ImageField(null=True, blank=True, upload_to="images/")
+
+    def image_url(self):
+        if self.imagen_producto and self.imagen_producto.name:
+            return '/media/' + self.imagen_producto.name
+        else:
+            return None
 
     class Meta:
         abstract = True
@@ -14,15 +21,14 @@ class Mouse(Producto):
     wireless = models.BooleanField()
 
     def __str__(self):
-        return self.idProducto + " - Mouse"
+        return str(self.idProducto) + " - Mouse"
 
 
 class Monitor(Producto):
     resolucion = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.idProducto + "  - Monitor"
-
+        return str(self.idProducto) + "  - Monitor"
 
 class Computador(Producto):
     cpu = models.CharField(max_length=5)
@@ -30,7 +36,7 @@ class Computador(Producto):
     hdd = models.IntegerField()
 
     def __str__(self):
-        return self.idProducto + "  - Computador"
+        return str(self.idProducto) + "  - Computador"
 
 
 class Cliente(models.Model):

@@ -10,7 +10,7 @@
         <th>Marca</th>
         <th>Precio</th>
         <th>Resolución</th>
-
+        <th>Imagen</th>
     </tr>
     </thead>
     <tbody >
@@ -20,9 +20,11 @@
         <td>{{ item.marca }}</td>
         <td>{{ item.precioUnitario }}</td>
         <td>{{ item.resolucion }}</td>
+        <td><img src="{{ item.image_url }}"   width="50" height="50" alt=""></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+
 
 {% endblock content %}
