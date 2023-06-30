@@ -17,3 +17,4 @@ urlpatterns = [
     path('/monitor', DeleteMonitorView.as_view(), name='delete_data'),
     path('/mouse', DeleteMouseView.as_view(), name='delete_data'),
     path('/computador', DeleteComputadorView.as_view(), name='delete_data'),
+]
