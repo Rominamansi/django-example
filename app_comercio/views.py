@@ -145,3 +145,68 @@ class DeleteClientView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+class DeleteMonitorView(View):
+
+    template_name = 'monitor.html'
+    success_url = 'monitor'
+
+    def post(self, request):
+        selected_items = request.POST.getlist('selected_items')
+
+        # Validate and sanitize the selected_items
+        try:
+            selected_items = list(map(int, selected_items))  # Convert to a list of integers
+        except ValueError:
+            raise Http404("Invalid input for selected_items")
+
+        # Perform the deletion
+        Monitor.objects.filter(idProducto__in=selected_items).delete()
+
+        return redirect(self.success_url)  # Redirect to a success page or another view
+
+    def get(self, request):
+        return render(request, self.template_name)
+class DeleteMouseView(View):
+
+    template_name = 'mouse.html'
+    success_url = 'mouse'
+
+    def post(self, request):
+        selected_items = request.POST.getlist('selected_items')
+
+        # Validate and sanitize the selected_items
+        try:
+            selected_items = list(map(int, selected_items))  # Convert to a list of integers
+        except ValueError:
+            raise Http404("Invalid input for selected_items")
+
+        # Perform the deletion
+        Mouse.objects.filter(idProducto__in=selected_items).delete()
+
+        return redirect(self.success_url)  # Redirect to a success page or another view
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DeleteComputadorView(View):
+
+    template_name = 'computador.html'
+    success_url = 'computador'
+
+    def post(self, request):
+        selected_items = request.POST.getlist('selected_items')
+
+        # Validate and sanitize the selected_items
+        try:
+            selected_items = list(map(int, selected_items))  # Convert to a list of integers
+        except ValueError:
+            raise Http404("Invalid input for selected_items")
+
+        # Perform the deletion
+        Computador.objects.filter(idProducto__in=selected_items).delete()
+
+        return redirect(self.success_url)  # Redirect to a success page or another view
+
+    def get(self, request):
+        return render(request, self.template_name)
+
