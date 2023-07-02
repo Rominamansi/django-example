@@ -7,13 +7,14 @@ from .models import Computador, Cliente, Monitor, Mouse
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
-        fields = ('rut', 'nombre', 'direccion', 'celular', 'email')
+        fields = ('rut', 'nombre', 'direccion', 'celular', 'email', 'imagen_cliente')
         labels = {
             'rut': '',
             'nombre': '',
             'direccion': '',
             'celular': '',
             'email': '',
+            'imagen_cliente': '',
         }
         widgets = {
             'rut': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'rut'}),
