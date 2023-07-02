@@ -139,12 +139,14 @@ class DeleteClientView(View):
             raise Http404("Invalid input for selected_items")
 
         # Perform the deletion
-        Cliente.objects.filter(rut__in=selected_items).delete()
+        if selected_items:
+            Cliente.objects.filter(rut__in=selected_items).delete()
 
         return redirect(self.success_url)  # Redirect to a success page or another view
 
     def get(self, request):
-        return render(request, self.template_name)
+        clientes = Cliente.objects.all()
+        return  render(request, self.template_name,{'clientes':clientes})
 class DeleteMonitorView(View):
 
     template_name = 'monitor.html'
@@ -160,12 +162,14 @@ class DeleteMonitorView(View):
             raise Http404("Invalid input for selected_items")
 
         # Perform the deletion
-        Monitor.objects.filter(idProducto__in=selected_items).delete()
+        if selected_items:
+            Monitor.objects.filter(idProducto__in=selected_items).delete()
 
         return redirect(self.success_url)  # Redirect to a success page or another view
 
     def get(self, request):
-        return render(request, self.template_name)
+         monitores = Monitor.objects.all()
+        return  render(request, self.template_name,{'monitores':monitores})
 class DeleteMouseView(View):
 
     template_name = 'mouse.html'
@@ -181,12 +185,15 @@ class DeleteMouseView(View):
             raise Http404("Invalid input for selected_items")
 
         # Perform the deletion
-        Mouse.objects.filter(idProducto__in=selected_items).delete()
+        if selected_items:
+            Mouse.objects.filter(idProducto__in=selected_items).delete()
 
         return redirect(self.success_url)  # Redirect to a success page or another view
 
     def get(self, request):
-        return render(request, self.template_name)
+        mouse = Mouse.objects.all()
+        return  render(request, self.template_name,{'mouse':mouse})
+        
 
 class DeleteComputadorView(View):
 
@@ -203,10 +210,12 @@ class DeleteComputadorView(View):
             raise Http404("Invalid input for selected_items")
 
         # Perform the deletion
-        Computador.objects.filter(idProducto__in=selected_items).delete()
+        if selected_items:
+            Computador.objects.filter(idProducto__in=selected_items).delete()
 
         return redirect(self.success_url)  # Redirect to a success page or another view
 
     def get(self, request):
-        return render(request, self.template_name)
+        computadores = Computador.objects.all()
+        return  render(request, self.template_name,{'computadores':computadores})
 
