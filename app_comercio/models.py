@@ -46,10 +46,17 @@ class Cliente(models.Model):
     direccion = models.TextField()
     celular = models.IntegerField()
     email = models.EmailField()
+    imagen_cliente = models.ImageField(null=True, blank=True, upload_to="images/")
     compraMouse = models.ManyToManyField(Mouse, blank=True)
     compraComputador = models.ManyToManyField(Computador, blank=True)
     compraMonitor = models.ManyToManyField(Monitor, blank=True)
     selected = models.BooleanField(default=False)
+    
+    def image_url(self):
+        if self.imagen_cliente and self.imagen_cliente.name:
+            return '/media/' + self.imagen_cliente.name
+        else:
+            return None
 
     objects = models.Manager()
 
