@@ -124,7 +124,7 @@ class AddMousePageView(SuccessMessageMixin, CreateView):
         return super().form_invalid(form)
 
 
-class DeleteClientView(View):
+class DeleteClienteView(View):
 
     template_name = 'cliente.html'
     success_url = 'cliente'
