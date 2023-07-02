@@ -2,7 +2,7 @@
 {% block content %}
 <h3>Producto: Mouse</h3>
 </br>
-<form method="POST" action="{% url 'delete_data' %}">
+<form method="POST" action="{% url 'delete_mouse' %}">
     {% csrf_token %}
 
 <table class="table table-striped table-hover">
@@ -13,6 +13,7 @@
         <th>Precio</th>
         <th>Wireless</th>
         <th>Seleccionar</th>
+        <th>Imagen</th>
 
     </tr>
     </thead>
@@ -24,11 +25,20 @@
         <td>{{ item.precioUnitario }}</td>
         <td>{{ item.wireless }}</td>
         <td><input type="checkbox" name="selected_items" value="{{ item.idProducto }}"></td>
+        <td><img src="{{ item.image_url }}"   width="50" height="50" alt=""></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
     <button type="submit">Delete Selected</button>
 </form>
+{% if selected_items %}
+<p>Los siguientes mouse han sido eliminados:'' </p>
+<ul>
+    {% for item in selected_items %}
+    <li>{{ item.id }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock content %}
