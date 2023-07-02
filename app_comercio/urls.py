@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import AboutPageView, ClientePageView, HomePageView, AddClientePageView, MonitorPageView, \
     AddComputadorPageView, MousePageView, ComputadorPageView, AddMonitorPageView, AddMousePageView, \
-    DeleteClientView, DeleteMonitorView, DeleteMouseView, DeleteComputadorView
+    DeleteClienteView, DeleteMonitorView, DeleteMouseView, DeleteComputadorView
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path("about", AboutPageView.as_view(), name="about"),
@@ -13,8 +13,8 @@ urlpatterns = [
     path("IngresarComputador", AddComputadorPageView.as_view(), name='ingresar-computador'),
     path("IngresarMonitor", AddMonitorPageView.as_view(), name='ingresar-monitor'),
     path("IngresarMouse", AddMousePageView.as_view(), name='ingresar-mouse'),
-    path('/cliente', DeleteClientView.as_view(), name='delete_data'),
-    path('/monitor', DeleteMonitorView.as_view(), name='delete_data'),
-    path('/mouse', DeleteMouseView.as_view(), name='delete_data'),
-    path('/computador', DeleteComputadorView.as_view(), name='delete_data'),
+    path('delete_cliente', DeleteClientView.as_view(), name='delete_cliente'),
+    path('delete_monitor', DeleteMonitorView.as_view(), name='delete_monitor'),
+    path('delete_mouse', DeleteMouseView.as_view(), name='delete_mouse'),
+    path('delete_computador', DeleteComputadorView.as_view(), name='delete_computador'),
 ]
